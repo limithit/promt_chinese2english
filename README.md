@@ -1,1 +1,2 @@
-# promt_chinese2english
+# Easy Prompt Selector
+

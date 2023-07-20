@@ -1,0 +1,48 @@
+目:
+  色:
+    黒: black eyes
+    白: white eyes
+    赤: red eyes
+    青: blue eyes
+    緑: green eyes
+    紫: purple eyes
+    銀色: silver eyes
+    金色: golden eyes
+    灰色: gray eyes
+    水色: aqua eyes
+    茶色: brown eyes
+  状态:
+    半闭眼: half-closed eyes
+    闭眼: closed eyes
+
+耳:
+  精灵耳朵: elf ears
+  动物耳朵: animal ears
+  猫耳朵: cat ears
+  狐狸耳朵: fox ears
+
+表情:
+  笑: smile
+  凄笑: sad smile
+  邪恶的笑: evil smile
+  天使的笑: angelic smile
+  笑（強制）: forced smile
+  媚笑: seductive smile
+  咧嘴大笑: grin
+  露齿微笑（邪恶）: evil grin
+  傻笑: smirk
+  怒气: angry
+  悲伤: sad
+  哭泣: crying
+  泪水: tears
+  恐怖: scared
+  严肃: serious
+  生气: annoyed
+  陷入黑暗: dark persona
+
+口:
+  唇: lip
+  开口: open mouth
+  闭口: closed mouth
+  牙齿: teeth
+ 
