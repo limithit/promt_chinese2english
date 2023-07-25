@@ -1,7 +1,7 @@
-class EPSElementBuilder {
+class EPSElementBuilder_img {
   // Templates
   static baseButton(text, { size = 'sm', color = 'primary' }) {
-    const button = gradioApp().getElementById('txt2img_generate').cloneNode()
+    const button = gradioApp().getElementById('img2img_generate').cloneNode()
     button.id = ''
     button.classList.remove('gr-button-lg', 'gr-button-primary', 'lg', 'primary')
     button.classList.add(
@@ -36,7 +36,7 @@ class EPSElementBuilder {
 
   // Elements
   static openButton({ onClick }) {
-    const button = EPSElementBuilder.baseButton('🔯提示词库', { size: 'sm', color: 'secondary' })
+    const button = EPSElementBuilder_img.baseButton('🔯提示词库', { size: 'sm', color: 'secondary' })
     button.classList.add('easy_prompt_selector_button')
     button.addEventListener('click', onClick)
 
@@ -44,7 +44,7 @@ class EPSElementBuilder {
   }
 
   static areaContainer(id = undefined) {
-    const container = gradioApp().getElementById('txt2img_results').cloneNode()
+    const container = gradioApp().getElementById('img2img_results').cloneNode()
     container.id = id
     container.style.gap = 0
     container.style.display = 'none'
@@ -53,7 +53,7 @@ class EPSElementBuilder {
   }
 
   static tagButton({ title, onClick, onRightClick, color = 'primary' }) {
-    const button = EPSElementBuilder.baseButton(title, { color })
+    const button = EPSElementBuilder_img.baseButton(title, { color })
     button.style.height = '2rem'
     button.style.flexGrow = '0'
     button.style.margin = '2px'
@@ -112,7 +112,7 @@ class EPSElementBuilder {
   }
 }
 
-class EasyPromptSelector {
+class EasyPromptSelector2img {
   PATH_FILE = 'tmp/easyPromptSelector.txt'
   AREA_ID = 'easy-prompt-selector'
   SELECT_ID = 'easy-prompt-selector-select'
@@ -138,7 +138,7 @@ class EasyPromptSelector {
     }
 
     gradioApp()
-      .getElementById('txt2img_toprow')
+      .getElementById('img2img_toprow')
       .after(this.render())
   }
 
@@ -179,7 +179,7 @@ class EasyPromptSelector {
     row.appendChild(dropDown)
 
     const settings = document.createElement('div')
-    const checkbox = EPSElementBuilder.checkbox('输入负面提示', {
+    const checkbox = EPSElementBuilder_img.checkbox('输入负面提示', {
       onChange: (checked) => { this.toNegative = checked }
     })
     settings.style.flex = '1'
@@ -187,7 +187,7 @@ class EasyPromptSelector {
 
     row.appendChild(settings)
 
-    const container = EPSElementBuilder.areaContainer(this.AREA_ID)
+    const container = EPSElementBuilder_img.areaContainer(this.AREA_ID)
 
     container.appendChild(row)
     container.appendChild(this.renderContent())
@@ -196,7 +196,7 @@ class EasyPromptSelector {
   }
 
   renderDropdown() {
-    const dropDown = EPSElementBuilder.dropDown(
+    const dropDown = EPSElementBuilder_img.dropDown(
       this.SELECT_ID,
       Object.keys(this.tags), {
         onChange: (selected) => {
@@ -219,7 +219,7 @@ class EasyPromptSelector {
     Object.keys(this.tags).forEach((key) => {
       const values = this.tags[key]
 
-      const fields = EPSElementBuilder.tagFields()
+      const fields = EPSElementBuilder_img.tagFields()
       fields.id = `easy-prompt-selector-container-${key}`
       fields.style.display = 'none'
       fields.style.flexDirection = 'row'
@@ -245,12 +245,12 @@ class EasyPromptSelector {
 
         if (typeof values === 'string') { return this.renderTagButton(key, values, 'secondary') }
 
-        const fields = EPSElementBuilder.tagFields()
+        const fields = EPSElementBuilder_img.tagFields()
         fields.style.flexDirection = 'column'
 
         fields.append(this.renderTagButton(key, `@${randomKey}@`))
 
-        const buttons = EPSElementBuilder.tagFields()
+        const buttons = EPSElementBuilder_img.tagFields()
         buttons.id = 'buttons'
         fields.append(buttons)
         this.renderTagButtons(values, randomKey).forEach((button) => {
@@ -263,7 +263,7 @@ class EasyPromptSelector {
   }
 
   renderTagButton(title, value, color = 'primary') {
-    return EPSElementBuilder.tagButton({
+    return EPSElementBuilder_img.tagButton({
       title,
       onClick: (e) => {
         e.preventDefault();
@@ -285,7 +285,7 @@ class EasyPromptSelector {
   }
 
   addTag(tag, toNegative = false) {
-    const id = toNegative ? 'txt2img_neg_prompt' : 'txt2img_prompt'
+    const id = toNegative ? 'img2img_neg_prompt' : 'img2img_prompt'
     const textarea = gradioApp().getElementById(id).querySelector('textarea')
 
     if (textarea.value.trim() === '') {
@@ -300,7 +300,7 @@ class EasyPromptSelector {
   }
 
   removeTag(tag, toNegative = false) {
-    const id = toNegative ? 'txt2img_neg_prompt' : 'txt2img_prompt'
+    const id = toNegative ? 'img2img_neg_prompt' : 'img2img_prompt'
     const textarea = gradioApp().getElementById(id).querySelector('textarea')
 
     if (textarea.value.trimStart().startsWith(tag)) {
@@ -316,9 +316,9 @@ class EasyPromptSelector {
 
 onUiLoaded(async () => {
   yaml = window.jsyaml
-  const easyPromptSelector = new EasyPromptSelector(yaml, gradioApp())
+  const easyPromptSelector = new EasyPromptSelector2img(yaml, gradioApp())
 
-  const button = EPSElementBuilder.openButton({
+  const button = EPSElementBuilder_img.openButton({
     onClick: () => {
       const tagArea = gradioApp().querySelector(`#${easyPromptSelector.AREA_ID}`)
       easyPromptSelector.changeVisibility(tagArea, easyPromptSelector.visible = !easyPromptSelector.visible)
@@ -330,13 +330,13 @@ onUiLoaded(async () => {
     await easyPromptSelector.init()
   })
 
-  const txt2imgActionColumn = gradioApp().getElementById('txt2img_actions_column')
+  const img2imgActionColumn = gradioApp().getElementById('img2img_actions_column')
   const container = document.createElement('div')
-  container.classList.add('easy_prompt_selector_container')
+  container.classList.add('easy_prompt_selector_container_img')
   container.appendChild(button)
   container.appendChild(reloadButton)
 
-  txt2imgActionColumn.appendChild(container)
+  img2imgActionColumn.appendChild(container)
 
   await easyPromptSelector.init()
 })
